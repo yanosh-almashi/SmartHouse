@@ -1,3 +1,6 @@
+import CoffeeMachine from './coffeeMachine';
+import AirConditioner from './airConditioner';
+
 class House {
   constructor(name) {
     this._name = name;
@@ -18,8 +21,12 @@ class House {
     return !this._deviceList.has(name);
   }
 
+  _isInstanceOf(device) {
+    return device instanceof CoffeeMachine || device instanceof AirConditioner;
+  }
+
   addDevice(device) {
-    if (this._isUnique(device.name)) {
+    if (this._isUnique(device.name) && this._isInstanceOf(device)) {
       this._deviceList.set(device.name, device);
     } else console.log(`name's already taken`);
   }

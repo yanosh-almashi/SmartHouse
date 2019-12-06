@@ -31,16 +31,15 @@ class CoffeeMachine extends CommonDevice {
 
   makeCoffee() {
     if (this._state) {
-      const p = new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         const makeTime = 20 * this._power;
         setTimeout(() => {
           resolve();
         }, makeTime);
+      }).then(() => {
+        this._ready = true;
+        console.log(`Your ${this._modes[this._currentMode]} is ready`);
       });
-      p.then(() => (this._ready = true));
-      p.then(() =>
-        console.log(`Your ${this._modes[this._currentMode]} is ready`)
-      );
     }
   }
 
